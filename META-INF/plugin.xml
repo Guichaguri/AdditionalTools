@@ -1,15 +1,17 @@
 <idea-plugin version="2">
   <id>me.guichaguri.additionaltools</id>
   <name>Additional Tools</name>
-  <version>1.0</version>
+  <version>1.0.0</version>
   <vendor email="guichaguri@gmail.com" url="http://github.com/Guichaguri/">Guichaguri</vendor>
 
   <description><![CDATA[
-      This plugin adds additional tools.<br>
+      This plugin adds random and useful tools.<br>
       <ul>
         <li>Import All - Imports all missing imports</li>
         <li>Completion Documentation - Shows documentation in the auto completion list</li>
       </ul>
+      It's a small plugin with tools that I really wanted to have. If you have a suggestion for more functionality, just leave it in the Issue Tracker<br>
+      I only tested on IntelliJ IDEA. I may add support to others JetBrains IDEs in the future.<br>
     ]]></description>
 
   <change-notes><![CDATA[
@@ -18,7 +20,7 @@
   </change-notes>
 
   <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
-  <idea-version since-build="141"/>
+  <idea-version since-build="131"/>
 
   <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
        on how to target different products -->
@@ -47,7 +49,7 @@
       <action id="import-all" class="me.guichaguri.additionaltools.ImportAllAction" text="Import All"
               description="Import all missing classes">
           <add-to-group group-id="CodeFormatGroup" anchor="before" relative-to-action="OptimizeImports"/>
-          <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl I"/>
+          <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl O"/>
       </action>
   </actions>
 
