@@ -12,6 +12,8 @@ import com.intellij.openapi.ui.popup.JBPopup;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.psi.PsiElement;
 import com.intellij.ui.awt.RelativePoint;
+import com.intellij.util.Alarm;
+import com.intellij.util.Alarm.ThreadToUse;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.beans.PropertyChangeEvent;
@@ -23,6 +25,8 @@ import javax.swing.JComponent;
  * @author Guilherme Chaguri
  */
 public class AutoJavadoc implements PropertyChangeListener {
+
+    protected static Alarm alarm = new Alarm(ThreadToUse.SWING_THREAD);
 
     @Override
     public void propertyChange(PropertyChangeEvent event) {
@@ -42,6 +46,7 @@ public class AutoJavadoc implements PropertyChangeListener {
                 popup.cancel();
                 popup = null;
             }
+            alarm.cancelAllRequests();
         }
 
         @Override
@@ -50,6 +55,7 @@ public class AutoJavadoc implements PropertyChangeListener {
                 popup.cancel();
                 popup = null;
             }
+            alarm.cancelAllRequests();
         }
 
         @Override
@@ -58,33 +64,40 @@ public class AutoJavadoc implements PropertyChangeListener {
                 popup.cancel();
                 popup = null;
             }
-            Lookup lookup = event.getLookup();
+            alarm.cancelAllRequests();
 
-            LookupElement item = lookup.getCurrentItem();
+            final Lookup lookup = event.getLookup();
+
+            final LookupElement item = lookup.getCurrentItem();
             if(item == null) return;
 
-            String key = item.getLookupString();
-            DocumentationComponent comp;
+            alarm.addRequest(new Runnable() {
+                @Override
+                public void run() {
+                    String key = item.getLookupString();
+                    DocumentationComponent comp;
 
-            if(hs.containsKey(key)) {
-                comp = hs.get(key);
-            } else {
-                PsiElement e = item.getPsiElement();
-                if(e == null) return;
+                    if(hs.containsKey(key)) {
+                        comp = hs.get(key);
+                    } else {
+                        PsiElement e = item.getPsiElement();
+                        if(e == null) return;
 
-                DocumentationManager manager = DocumentationManager.getInstance(lookup.getEditor().getProject());
-                comp = new DocumentationComponent(manager);
-                manager.queueFetchDocInfo(e, comp);
-                hs.put(key, comp);
-            }
+                        DocumentationManager manager = DocumentationManager.getInstance(lookup.getEditor().getProject());
+                        comp = new DocumentationComponent(manager);
+                        manager.queueFetchDocInfo(e, comp);
+                        hs.put(key, comp);
+                    }
 
-            JComponent j = ((LookupImpl)lookup).getComponent();
-            ComponentPopupBuilder b = JBPopupFactory.getInstance().createComponentPopupBuilder(comp, j);//JBPopupFactory.getInstance().createHtmlTextBalloonBuilder("ASDDDDDDDD", MessageType.INFO, new URLListener());
-            popup = b.createPopup();
-            Dimension dim = new Dimension(j.getWidth(), 200);
-            popup.setMinimumSize(dim);
-            popup.setSize(dim);
-            popup.show(new RelativePoint(j, new Point(0, -200 - lookup.getEditor().getLineHeight())));
+                    JComponent j = ((LookupImpl)lookup).getComponent();
+                    ComponentPopupBuilder b = JBPopupFactory.getInstance().createComponentPopupBuilder(comp, j);//JBPopupFactory.getInstance().createHtmlTextBalloonBuilder("ASDDDDDDDD", MessageType.INFO, new URLListener());
+                    popup = b.createPopup();
+                    Dimension dim = new Dimension(j.getWidth(), 200);
+                    popup.setMinimumSize(dim);
+                    popup.setSize(dim);
+                    popup.show(new RelativePoint(j, new Point(0, -200 - lookup.getEditor().getLineHeight())));
+                }
+            }, 1000L);
         }
 
     }
