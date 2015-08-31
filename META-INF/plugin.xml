@@ -31,6 +31,12 @@
   <extensions defaultExtensionNs="com.intellij">
     <!-- Add your extensions here -->
     <codeInsight.unresolvedReferenceQuickFixProvider implementation="me.guichaguri.additionaltools.QuickFixer"/>
+
+    <applicationConfigurable groupId="tools" id="additionaltools.settings" displayName="Additional Tools"
+                           instance="me.guichaguri.additionaltools.ATSettings" />
+
+    <applicationService serviceImplementation="me.guichaguri.additionaltools.ATService"/>
+
   </extensions>
 
   <application-components>
