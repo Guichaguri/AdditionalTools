@@ -32,10 +32,10 @@
     <!-- Add your extensions here -->
     <codeInsight.unresolvedReferenceQuickFixProvider implementation="me.guichaguri.additionaltools.QuickFixer"/>
 
+    <applicationService serviceImplementation="me.guichaguri.additionaltools.ATService"/>
+
     <applicationConfigurable groupId="tools" id="additionaltools.settings" displayName="Additional Tools"
                            instance="me.guichaguri.additionaltools.ATSettings" />
-
-    <applicationService serviceImplementation="me.guichaguri.additionaltools.ATService"/>
 
   </extensions>
 
@@ -52,7 +52,7 @@
 
   <actions>
     <!-- Add your actions here -->
-      <action id="import-all" class="me.guichaguri.additionaltools.ImportAllAction" text="Import All"
+      <action id="import-all" class="me.guichaguri.additionaltools.ImportAll.ImportAllAction" text="Import All"
               description="Import all missing classes">
           <add-to-group group-id="CodeFormatGroup" anchor="before" relative-to-action="OptimizeImports"/>
           <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl O"/>

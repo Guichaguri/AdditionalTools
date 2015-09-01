@@ -3,7 +3,7 @@ package me.guichaguri.additionaltools;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
-import me.guichaguri.additionaltools.ATService.ATState;
+import me.guichaguri.additionaltools.ATService.State;
 
 /**
  * @author Guilherme Chaguri
@@ -21,21 +21,24 @@ public class ATSettingsForm {
     }
 
     public boolean isModified(ATService service) {
-        ATState state = service.getState();
+        State state = service.getState();
         return importAll.isSelected() != state.importAllEnabled ||
                 (docTime.getValue() instanceof Long && (Long)docTime.getValue() != state.documentationTime);
     }
 
     public void save(ATService service) {
-        ATState state = service.getState();
+        State state = service.getState();
         state.importAllEnabled = importAll.isSelected();
-        if(docTime.getValue() instanceof Long) {
-            state.documentationTime = (Long)docTime.getValue();
+        System.out.println(state.importAllEnabled);
+        System.out.println(docTime.getValue() + " - " + docTime.getValue().getClass().getName());
+        if(docTime.getValue() instanceof Number) {
+            state.documentationTime = ((Number)docTime.getValue()).longValue();
+            System.out.println(state.documentationTime);
         }
     }
 
     public void reset(ATService service) {
-        ATState state = service.getState();
+        State state = service.getState();
 
         importAll.setSelected(state.importAllEnabled);
         docTime.setValue(state.documentationTime);

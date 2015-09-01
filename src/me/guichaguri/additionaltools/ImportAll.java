@@ -2,8 +2,11 @@ package me.guichaguri.additionaltools;
 
 import com.intellij.codeInsight.daemon.impl.actions.AddImportAction;
 import com.intellij.codeInsight.daemon.impl.quickfix.ImportClassFix;
+import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.command.CommandProcessor;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiFile;
@@ -64,5 +67,19 @@ public class ImportAll extends ImportClassFix {
     @Override
     public void invoke(Project project, Editor editor, PsiFile file) {
         importAll(project, editor);
+    }
+
+
+    public static class ImportAllAction extends AnAction {
+        private Boolean importAll = null;
+
+        public void actionPerformed(AnActionEvent event) {
+            if(importAll == null) {
+                importAll = ATService.getInstance().getState().importAllEnabled;
+            }
+            if(!importAll) return;
+            ImportAll.importAll(event.getProject(), FileEditorManager.getInstance(event.getProject()).getSelectedTextEditor());
+        }
+
     }
 }

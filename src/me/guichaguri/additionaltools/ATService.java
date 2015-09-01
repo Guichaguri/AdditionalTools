@@ -2,39 +2,37 @@ package me.guichaguri.additionaltools;
 
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.ServiceManager;
-import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.components.StoragePathMacros;
-import me.guichaguri.additionaltools.ATService.ATState;
+import me.guichaguri.additionaltools.ATService.State;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Guilherme Chaguri
  */
-@State(
+@com.intellij.openapi.components.State(
     name = "ATService",
     storages = @Storage(file = StoragePathMacros.APP_CONFIG + "/additionaltools.xml")
 )
-public class ATService implements PersistentStateComponent<ATState> {
+public class ATService implements PersistentStateComponent<State> {
 
     public static ATService getInstance() {
         return ServiceManager.getService(ATService.class);
     }
 
-    ATState state = new ATState();
+    State state = new State();
 
     @Nullable
     @Override
-    public ATState getState() {
+    public State getState() {
         return state;
     }
     @Override
-    public void loadState(ATState state) {
-        this.state.importAllEnabled = state.importAllEnabled;
-        this.state.documentationTime = state.documentationTime;
+    public void loadState(State state) {
+        this.state = state;
     }
 
-    class ATState {
+    public static class State {
         public long documentationTime = 1000L;
         public boolean importAllEnabled = true;
     }

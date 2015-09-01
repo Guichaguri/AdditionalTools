@@ -9,11 +9,16 @@ import org.jetbrains.annotations.NotNull;
  * @author Guilherme Chaguri
  */
 public class QuickFixer extends UnresolvedReferenceQuickFixProvider<PsiJavaCodeReferenceElement> {
-
+    private Boolean importAll = null;
 
     @Override
     public void registerFixes(PsiJavaCodeReferenceElement ref, QuickFixActionRegistrar registrar) {
-        registrar.register(new ImportAll(ref));
+        if(importAll == null) {
+            importAll = ATService.getInstance().getState().importAllEnabled;
+        }
+        if(importAll) {
+            registrar.register(new ImportAll(ref));
+        }
     }
 
     @NotNull

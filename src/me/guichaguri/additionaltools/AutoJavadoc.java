@@ -25,7 +25,7 @@ import javax.swing.JComponent;
  * @author Guilherme Chaguri
  */
 public class AutoJavadoc implements PropertyChangeListener {
-
+    private static Long time = null;
     protected static Alarm alarm = new Alarm(ThreadToUse.SWING_THREAD);
 
     @Override
@@ -71,6 +71,10 @@ public class AutoJavadoc implements PropertyChangeListener {
             final LookupElement item = lookup.getCurrentItem();
             if(item == null) return;
 
+            if(time == null) {
+                time = ATService.getInstance().getState().documentationTime;
+            }
+
             alarm.addRequest(new Runnable() {
                 @Override
                 public void run() {
@@ -97,7 +101,7 @@ public class AutoJavadoc implements PropertyChangeListener {
                     popup.setSize(dim);
                     popup.show(new RelativePoint(j, new Point(0, -200 - lookup.getEditor().getLineHeight())));
                 }
-            }, 1000L);
+            }, time);
         }
 
     }
