@@ -29,11 +29,8 @@ public class ATSettingsForm {
     public void save(ATService service) {
         State state = service.getState();
         state.importAllEnabled = importAll.isSelected();
-        System.out.println(state.importAllEnabled);
-        System.out.println(docTime.getValue() + " - " + docTime.getValue().getClass().getName());
         if(docTime.getValue() instanceof Number) {
             state.documentationTime = ((Number)docTime.getValue()).longValue();
-            System.out.println(state.documentationTime);
         }
     }
 

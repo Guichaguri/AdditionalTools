@@ -39,7 +39,6 @@ public class ATSettings implements Configurable { // TODO: register?
 
     @Override
     public void apply() throws ConfigurationException {
-        System.out.println("SAVE");
         form.save(ATService.getInstance());
     }
 
