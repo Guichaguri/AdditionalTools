@@ -5,10 +5,11 @@
   <vendor email="guichaguri@gmail.com" url="http://github.com/Guichaguri/">Guichaguri</vendor>
 
   <description><![CDATA[
-      This plugin adds random and useful tools.<br>
+      This <em>small</em> plugin adds random and useful tools.<br>
       <ul>
         <li>Import All - Imports all missing imports</li>
-        <li>Completion Documentation - Shows documentation in the auto completion list</li>
+        <li>Dynamic Documentation - Shows documentation on top of the auto completion list</li>
+        <li>More? I just need ideas :)</li>
       </ul>
       It's a small plugin with tools that I really wanted to have. If you have a suggestion for more functionality, just leave it in the Issue Tracker<br>
       I only tested on IntelliJ IDEA. I may add support to others JetBrains IDEs in the future.<br>
