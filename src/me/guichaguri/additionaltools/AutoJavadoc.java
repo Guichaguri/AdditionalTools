@@ -94,7 +94,8 @@ public class AutoJavadoc implements PropertyChangeListener {
                     }
 
                     JComponent j = ((LookupImpl)lookup).getComponent();
-                    ComponentPopupBuilder b = JBPopupFactory.getInstance().createComponentPopupBuilder(comp, j);//JBPopupFactory.getInstance().createHtmlTextBalloonBuilder("ASDDDDDDDD", MessageType.INFO, new URLListener());
+                    if((!j.isValid()) || (!j.isVisible())) return;
+                    ComponentPopupBuilder b = JBPopupFactory.getInstance().createComponentPopupBuilder(comp, j);
                     popup = b.createPopup();
                     Dimension dim = new Dimension(j.getWidth(), 200);
                     popup.setMinimumSize(dim);
