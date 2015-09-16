@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <id>me.guichaguri.additionaltools</id>
   <name>Additional Tools</name>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <vendor email="guichaguri@gmail.com" url="http://github.com/Guichaguri/">Guichaguri</vendor>
 
   <description><![CDATA[
@@ -16,7 +16,11 @@
     ]]></description>
 
   <change-notes><![CDATA[
-      First version
+      <ul>
+        <li>Added Settings</li>
+        <li>Added time to show the documentation</li>
+        <li>Bug fixes</li>
+      </ul>
     ]]>
   </change-notes>
 
