@@ -57,7 +57,7 @@
 
   <actions>
     <!-- Add your actions here -->
-      <action id="import-all" class="me.guichaguri.additionaltools.ImportAll.ImportAllAction" text="Import All"
+      <action id="import-all" class="me.guichaguri.additionaltools.ImportAll$ImportAllAction" text="Import All"
               description="Import all missing classes">
           <add-to-group group-id="CodeFormatGroup" anchor="before" relative-to-action="OptimizeImports"/>
           <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl O"/>
