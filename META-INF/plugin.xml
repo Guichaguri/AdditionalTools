@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <id>me.guichaguri.additionaltools</id>
   <name>Additional Tools</name>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   <vendor email="guichaguri@gmail.com" url="http://github.com/Guichaguri/">Guichaguri</vendor>
 
   <description><![CDATA[
@@ -17,9 +17,7 @@
 
   <change-notes><![CDATA[
       <ul>
-        <li>Added Settings</li>
-        <li>Added time to show the documentation</li>
-        <li>Bug fixes</li>
+        <li>Fixed a small crash when loading the Import All action</li>
       </ul>
     ]]>
   </change-notes>
